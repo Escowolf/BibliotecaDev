@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Read, Write, Update, Delete Data</title>
+    </style>
+</head>
+
+<body>
+    <label>E-mail</label>
+    <input type="text" id="inputEmail" placeholder="e-mail">
+    <label>Senha</label>
+    <input type="text" id="inputPassword" placeholder="********"><br>
+    <label>Manter conectado</label>
+    <input type="checkbox" id="rememberMe">
+
+    <hr>
+    <button id="btnLogin">Login</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+            authDomain: "bibliotecadevend.firebaseapp.com",
+            databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+            projectId: "bibliotecadevend",
+            storageBucket: "bibliotecadevend.appspot.com",
+            messagingSenderId: "846419182189",
+            appId: "1:846419182189:web:90650898ab6ab54f09f564",
+            measurementId: "G-HL3H3TLRR5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        /* import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+ 
+         const auth = getAuth();
+         signInWithEmailAndPassword(auth, email, password)
+             .then((userCredential) => {
+                 // Signed in
+                 const user = userCredential.user;
+                 // ...
+             })
+             .catch((error) => {
+                 const errorCode = error.code;
+                 const errorMessage = error.message;
+             });*/
+
+        var btnLogin = document.getElementById('btnLogin');
+        var inputEmail = document.getElementById('inputEmail');
+        var inputPassword = document.getElementById('inputPassword');
+
+        btnLogin.addEventListener('click', function () {
+            firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
+                .then((userCredential) => {
+                    // Signed in
+                    var user = userCredential.user;
+                    alert("Login bem-sucedido!")
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                });
+        });
+    </script>
+
+</body>
+
+</html>

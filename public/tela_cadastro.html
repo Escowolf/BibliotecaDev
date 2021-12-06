@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.css" />
+    <link href="/css/default.css" rel="stylesheet">
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title>Biblioteca Dev - Cadastro</title>
+  </head>
+<body>
+    <div>
+        <table align="center">
+            <form id="contatoForm">
+                <div id="dados de cadastro">
+                    <h1>CADASTRO<br>
+
+                    <tr>
+                        <td>
+                            <label>Nome:</label>
+                            <input type="text" id="nome">
+                        </td>
+
+                        
+                        <td>                            
+                            <label>Sobrenome:</label>
+                            <input type="text" id="sobrenome">
+                        </td>
+                    </tr>
+
+                    <br>
+                    <tr>
+                        <td>
+                            <br>                            
+                            <label>Matrícula:</label>
+                            <input type="number" id="matricula">
+                            </br>
+                        </td>
+
+                        <td>  
+                            <br>                          
+                            <label>CPF:</label>
+                            <input type="number" id="cpf" name="cpf" required>
+                            </br>
+                        </td>
+                            
+                    </tr>
+                </br>
+
+                    <tr>
+                        <td> 
+                            <br>                           
+                            <label>Senha:</label>
+                            <input type="text" id="senha">
+                            </br>
+                        </td>
+
+                        <td>  
+                            <br>                          
+                            <label>Telefone:</label>
+                            <input type="tel" id="telefone">
+                            </br>
+                        </td>
+                            
+                    </tr>
+
+                    <tr>
+                        <td> 
+                            <br>                           
+                            <label>Repita sua senha:</label>
+                            <input type="text" id="Repetir">
+                            </br>
+                        </td>
+                            
+                    </tr>
+
+                    <div id="aside">
+                        <img src="books.png" alt="Books logo">
+                    </div>    
+
+
+                    
+                </div>
+            </form>
+        </table>
+    </div>
+
+        <br>
+        <div>
+            <div class="g-recaptcha" data-sitekey="6LfcwGwdAAAAAOeSVaaEDMb2mo6zQtBO3WAkOrdt"></div>
+            <button type="button" class="btn" id="btnSalvar">FINALIZAR CADASTRO</button>
+            <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+        </div>
+        </br>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+    
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+                authDomain: "bibliotecadevend.firebaseapp.com",
+                databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+                projectId: "bibliotecadevend",
+                storageBucket: "bibliotecadevend.appspot.com",
+                messagingSenderId: "846419182189",
+                appId: "1:846419182189:web:90650898ab6ab54f09f564",
+                measurementId: "G-HL3H3TLRR5"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+    
+            import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+    
+            const db = getDatabase();
+    
+            var nome = document.getElementById("nome");
+            var sobrenome = document.getElementById("sobrenome");
+            var matricula = document.getElementById("matricula");
+            var cpf = document.getElementById("cpf");
+            var senha = document.getElementById("senha");
+            var telefone = document.getElementById("telefone");
+    
+            var btnSalvar = document.getElementById("btnSalvar");
+    
+            //INSERINDO DADOS NO BD---------------------------------------------
+            function InsertData() {
+                set(ref(db, "users/" + cpf.value), {
+                    cpf: cpf.value,
+                    nome: nome.value,
+                    sobrenome:sobrenome.value,
+                    matricula: matricula.value,
+                    senha: senha.value,
+                    telefone: telefone.value    
+                })
+                    .then(() => {
+                        alert("Cadastro efetuado!");
+                    })
+                    .catch((error) => {
+                        alert("Algo deu errado! Erro" + error);
+                    });
+            }
+    
+            btnSalvar.addEventListener('click', InsertData);
+    
+    </script>
+
+  </body>
+</html>
