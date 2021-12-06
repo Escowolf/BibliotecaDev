@@ -9,18 +9,15 @@
 </head>
 
 <body>
-    <label>Nome</label>
-    <input type="text"  id="name" placeholder="Nome">
+    <label>E-mail</label>
+    <input type="text" id="inputEmail" placeholder="e-mail">
     <label>Senha</label>
-    <input type="text" id="senha" placeholder="********">
-    <label>CPF</label>
-    <input type="text"  id="cpf" placeholder="********">
+    <input type="text" id="inputPassword" placeholder="********"><br>
+    <label>Manter conectado</label>
+    <input type="checkbox" id="rememberMe">
 
     <hr>
-    <button id="createBtn">Criar</button>
-    <button id="readBtn">Buscar</button>
-    <button id="updateBtn">Atualizar</button>
-    <button id="deleteBtn">Apagar</button>
+    <button id="btnLogin">Login</button>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -46,57 +43,36 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
 
-        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+        /* import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+ 
+         const auth = getAuth();
+         signInWithEmailAndPassword(auth, email, password)
+             .then((userCredential) => {
+                 // Signed in
+                 const user = userCredential.user;
+                 // ...
+             })
+             .catch((error) => {
+                 const errorCode = error.code;
+                 const errorMessage = error.message;
+             });*/
 
-        const db = getDatabase();
+        var btnLogin = document.getElementById('btnLogin');
+        var inputEmail = document.getElementById('inputEmail');
+        var inputPassword = document.getElementById('inputPassword');
 
-        var name = document.getElementById("name");
-        var senha = document.getElementById("senha");
-        var cpf = document.getElementById("cpf");
-
-        var createBtn = document.getElementById("createBtn");
-        var updateBtn = document.getElementById("updateBtn");
-        var readBtn = document.getElementById("readBtn");
-        var deleteBtn = document.getElementById("deleteBtn");
-
-        //INSERINDO DADOS NO BD---------------------------------------------
-        function InsertData() {
-            set(ref(db, "users/" + cpf.value), {
-                cpf: cpf.value,
-                name: name.value,
-                senha: senha.value
-                
-            })
-                .then(() => {
-                    alert("Seus dados foram salvos com sucesso!");
+        btnLogin.addEventListener('click', function () {
+            firebase.auth().signInWithEmailAndPassword(inputEmail.value, inputPassword.value)
+                .then((userCredential) => {
+                    // Signed in
+                    var user = userCredential.user;
+                    alert("Login bem-sucedido!")
                 })
                 .catch((error) => {
-                    alert("Algo deu errado! Erro" + error);
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
                 });
-        }
-
-        createBtn.addEventListener('click', InsertData);
-
-        //SELECIONANDO DADOS NO BD---------------------------------------------
-        function SelectData(){
-            const dbref = ref(db);
-            
-            get(child(dbref,"users/"+cpf.value)).then((snapshot)=>{
-                if (snapshot.exists()){
-                    cpf.value = snapshot.val().cpf;
-                    name.value = snapshot.val().name;
-                    senha.value = snapshot.val().senha;                    
-                }
-
-                else{
-                    alert("Dado não encontrado!");
-                }
-            })
-            .catch((error)=>{
-                alert("Algo deu errado! Erro" + error);
-            })
-        }
-        readBtn.addEventListener('click', SelectData);
+        });
     </script>
 
 </body>
