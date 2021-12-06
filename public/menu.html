@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biblioteca Dev</title>
+    <link href="./css/header.css" rel="stylesheet">
+    <script>
+        function dark() {
+            var e1 = document.body;
+            e1.classList.toggle("dark-mode");
+        }
+    </script>
+  </head>
+<body>
+    <header class="header">
+        <nav>
+            <ul class="menu">
+                <li><a href="/public/tela_cadastro.html" target="bottom">CADASTRO</a></li>
+                <li><a href="/tela_catalogacao.html" target="bottom">CATALOGAÇÃO</a></li>
+                <li><a href="/tela_emprestimos.html" target="bottom">EMPRÉSTIMO</a></li>
+                <li><a href="/tela_renovacao.html" target="bottom">RENOVAÇÃO</a></li>
+                <li><a href="/tela_relatorios.html" target="bottom">RELATÓRIOS</a></li>
+                <li><a href="">AJUDA</a></li>
+                <li><a href="">SAIR</a></li>
+                <li><button id="btn" onclick="dark()">Modo<br>escuro</button></li>
+            </ul>
+        </nav>
+    </header>
+  </body>
+</html>

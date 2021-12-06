@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Biblioteca Dev</title>
-    <link href="/css/header.css" rel="stylesheet">
-    <script>
-        function dark() {
-            var e1 = document.body;
-            e1.classList.toggle("dark-mode");
-        }
-    </script>
-  </head>
-<body>
-    <header class="header">
-        <nav>
-            <ul class="menu">
-                <li><a href="tela_cadastro.html">CADASTRO</a></li>
-                <li><a href="tela_catalogacao.html">CATALOGAÇÃO</a></li>
-                <li><a href="tela_emprestimos.html">EMPRÉSTIMO</a></li>
-                <li><a href="tela_renovacao.html">RENOVAÇÃO</a></li>
-                <li><a href="tela_relatorios.html">RELATÓRIOS</a></li>
-                <li><a href="">AJUDA</a></li>
-                <li><a href="">SAIR</a></li>
-                <li><button id="btn" onclick="dark()">Modo<br>escuro</button></li>
-            </ul>
-        </nav>
-    </header>
-    <img src="books.png">
+<html lang="en">
 
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/header.css" rel="stylesheet">
+   
+    <style>
+
+        #top{ position: absolute; border: none; top: 0px; left: 0px; height: 20%;
+            width: 100%;
+        }
+        #bottom{ position: absolute; border:none; top: 20%; left: 0px; width: 100%;
+            height: 100%;
+        }
+  
+
+    </style>
+</head>
+
+<body>
+    <iframe id="top" src="menu.html" name="top"></iframe>
+    <iframe id="bottom" src="paginaMuda.html" name="bottom"></iframe>
+</body>
+
 </html>
