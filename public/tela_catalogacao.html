@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,140 +8,142 @@
     <title>Tela de Catalogação</title>
     <link href="/css/default.css" rel="stylesheet">
 </head>
+
 <body>
     <div>
         <h1>CATALOGAÇÃO</h1>
 
-            <br><a link href="/obra.html" class="btn" id="btnObra"> CADASTRO DE OBRA</a></br>
+        <br><a link href="/obra.html" class="btn" id="btnObra"> CADASTRO DE OBRA</a></br>
 
-            <br><a link href="/autoridade.html" class="btn" id="btnAutoridade">CADASTRO DE AUTORIDADES</a></br>
+        <br><a link href="/autoridade.html" class="btn" id="btnAutoridade">CADASTRO DE AUTORIDADES</a></br>
 
-            <br><a link href="/tela_cadastro.html" class="btn" id="btnUsuario">CADASTRO DE NOVOS USUÁRIOS</a></br>
+        <br><a link href="/tela_cadastro.html" class="btn" id="btnUsuario">CADASTRO DE NOVOS USUÁRIOS</a></br>
 
-            <br><a link href="/tela_aquisicao.html" class="btn" id="btncompras">CADASTRO DE COMPRAS/AQUISIÇÕES</a></br>
+        <br><a link href="/tela_aquisicao.html" class="btn" id="btncompras">CADASTRO DE COMPRAS/AQUISIÇÕES</a></br>
 
-          
-       
+
+
 
     </div>
 
     <script>
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
-        authDomain: "bibliotecadevend.firebaseapp.com",
-        databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
-        projectId: "bibliotecadevend",
-        storageBucket: "bibliotecadevend.appspot.com",
-        messagingSenderId: "846419182189",
-        appId: "1:846419182189:web:90650898ab6ab54f09f564",
-        measurementId: "G-HL3H3TLRR5"
-    };
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+            authDomain: "bibliotecadevend.firebaseapp.com",
+            databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+            projectId: "bibliotecadevend",
+            storageBucket: "bibliotecadevend.appspot.com",
+            messagingSenderId: "846419182189",
+            appId: "1:846419182189:web:90650898ab6ab54f09f564",
+            measurementId: "G-HL3H3TLRR5"
+        };
 
-    
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
 
-    import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
 
-    const db = getDatabase();
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
 
-    var name = document.getElementById("name");
-    var senha = document.getElementById("senha");
-    var cpf = document.getElementById("cpf");
+        const db = getDatabase();
 
-    var createBtn = document.getElementById("createBtn");
-    var updateBtn = document.getElementById("updateBtn");
-    var readBtn = document.getElementById("readBtn");
-    var deleteBtn = document.getElementById("deleteBtn");
+        var name = document.getElementById("name");
+        var senha = document.getElementById("senha");
+        var cpf = document.getElementById("cpf");
 
-    //INSERINDO DADOS NO BD---------------------------------------------
-    function InsertData() {
-        set(ref(db, "users/" + cpf.value), {
-            cpf: cpf.value,
-            name: name.value,
-            senha: senha.value
+        var createBtn = document.getElementById("createBtn");
+        var updateBtn = document.getElementById("updateBtn");
+        var readBtn = document.getElementById("readBtn");
+        var deleteBtn = document.getElementById("deleteBtn");
 
-        })
-            .then(() => {
-                alert("Dados salvos!");
+        //INSERINDO DADOS NO BD---------------------------------------------
+        function InsertData() {
+            set(ref(db, "users/" + cpf.value), {
+                cpf: cpf.value,
+                name: name.value,
+                senha: senha.value
+
             })
-            .catch((error) => {
-                alert("Algo deu errado! Erro" + error);
-            });
-    }
+                .then(() => {
+                    alert("Dados salvos!");
+                })
+                .catch((error) => {
+                    alert("Algo deu errado! Erro" + error);
+                });
+        }
 
-    createBtn.addEventListener('click', InsertData);
+        createBtn.addEventListener('click', InsertData);
 
-    //BUSCANDO DADOS NO BD---------------------------------------------
-    function SelectData() {
-        const dbref = ref(db);
+        //BUSCANDO DADOS NO BD---------------------------------------------
+        function SelectData() {
+            const dbref = ref(db);
 
-        get(child(dbref, "users/" + cpf.value)).then((snapshot) => {
-            if (snapshot.exists()) {
-                cpf.value = snapshot.val().cpf;
-                name.value = snapshot.val().name;
-                senha.value = snapshot.val().senha;
-            }
+            get(child(dbref, "users/" + cpf.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    cpf.value = snapshot.val().cpf;
+                    name.value = snapshot.val().name;
+                    senha.value = snapshot.val().senha;
+                }
 
-            else {
-                alert("Dado não encontrado!");
-            }
-        })
-            .catch((error) => {
-                alert("Algo deu errado! Erro" + error);
+                else {
+                    alert("Dado não encontrado!");
+                }
             })
-    }
-    readBtn.addEventListener('click', SelectData);
+                .catch((error) => {
+                    alert("Algo deu errado! Erro" + error);
+                })
+        }
+        readBtn.addEventListener('click', SelectData);
 
-    //ATUALIZANDO DADOS NO BD---------------------------------------------
-    function UpdateData() {
-        const dbref = ref(db);
+        //ATUALIZANDO DADOS NO BD---------------------------------------------
+        function UpdateData() {
+            const dbref = ref(db);
 
-        update(ref(db, "users/" + cpf.value), {
-            cpf: cpf.value,
-            name: name.value,
-            senha: senha.value
+            update(ref(db, "users/" + cpf.value), {
+                cpf: cpf.value,
+                name: name.value,
+                senha: senha.value
 
-        })
-            .then(() => {
-                alert("Dados atualizados!");
             })
-            .catch((error) => {
-                alert("Algo deu errado! Erro" + error);
-            });
-    }
+                .then(() => {
+                    alert("Dados atualizados!");
+                })
+                .catch((error) => {
+                    alert("Algo deu errado! Erro" + error);
+                });
+        }
 
-    updateBtn.addEventListener('click', UpdateData);
+        updateBtn.addEventListener('click', UpdateData);
 
-    //DELETANDO DADOS NO BD---------------------------------------------
-    function DeleteData() {
-        const dbref = ref(db);
+        //DELETANDO DADOS NO BD---------------------------------------------
+        function DeleteData() {
+            const dbref = ref(db);
 
-        remove(ref(db, "users/" + cpf.value), {
-            cpf: cpf.value,
-            name: name.value,
-            senha: senha.value
+            remove(ref(db, "users/" + cpf.value), {
+                cpf: cpf.value,
+                name: name.value,
+                senha: senha.value
 
-        })
-            .then(() => {
-                alert("Dado deletado!");
             })
-            .catch((error) => {
-                alert("Algo deu errado! Erro" + error);
-            });
-    }
-    
-    deleteBtn.addEventListener('click', DeleteData);
-</script>
+                .then(() => {
+                    alert("Dado deletado!");
+                })
+                .catch((error) => {
+                    alert("Algo deu errado! Erro" + error);
+                });
+        }
+
+        deleteBtn.addEventListener('click', DeleteData);
+    </script>
 </body>
+
 </html>
