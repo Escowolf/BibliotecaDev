@@ -1,22 +1,22 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+ // Import the functions you need from the SDKs you need
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+ // TODO: Add SDKs for Firebase products that you want to use
+ // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBZV0AXZ04x8cpQIT90eDCsTodt0b3bNKU",
-  authDomain: "bibliotecadev.firebaseapp.com",
-  databaseURL: "https://bibliotecadev-default-rtdb.firebaseio.com",
-  projectId: "bibliotecadev",
-  storageBucket: "bibliotecadev.appspot.com",
-  messagingSenderId: "761507665214",
-  appId: "1:761507665214:web:2fd7d8a9e0d4092ca9486f",
-  measurementId: "G-DNRNCPKF2B"
-};
+ // Your web app's Firebase configuration
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ const firebaseConfig = {
+     apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+     authDomain: "bibliotecadevend.firebaseapp.com",
+     databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+     projectId: "bibliotecadevend",
+     storageBucket: "bibliotecadevend.appspot.com",
+     messagingSenderId: "846419182189",
+     appId: "1:846419182189:web:90650898ab6ab54f09f564",
+     measurementId: "G-HL3H3TLRR5"
+ };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+ // Initialize Firebase
+ const app = initializeApp(firebaseConfig);
+ const analytics = getAnalytics(app);
