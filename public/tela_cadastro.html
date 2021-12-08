@@ -18,86 +18,87 @@
 
                     <tr>
                         <td>
-                            <label>Nome:</label>
-                            <input type="text" id="nome">
-                        </td>
+                            <label>Nome*:</label>
+                                <input type="text" id="nome" required>
+                            </td>
 
-                        
-                        <td>                            
-                            <label>Sobrenome:</label>
-                            <input type="text" id="sobrenome">
-                        </td>
-                    </tr>
 
-                    <br>
-                    <tr>
-                        <td>
-                            <br>                            
-                            <label>Matrícula:</label>
-                            <input type="number" id="matricula">
-                            </br>
-                        </td>
+                            <td>
+                                <label>Sobrenome*:</label>
+                                <input type="text" id="sobrenome" required>
+                            </td>
+                        </tr>
 
-                        <td>  
-                            <br>                          
-                            <label>CPF:</label>
-                            <input type="number" id="cpf" name="cpf" required>
-                            </br>
-                        </td>
-                            
-                    </tr>
-                </br>
+                        <br>
+                        <tr>
+                            <td>
+                                <br>
+                                <label>Matrícula*:</label>
+                                <input type="number" id="matricula" required>
+                                </br>
+                            </td>
 
-                    <tr>
-                        <td> 
-                            <br>                           
-                            <label>Senha:</label>
-                            <input type="text" id="senha">
-                            </br>
-                        </td>
+                            <td>
+                                <br>
+                                <label>CPF*:</label>
+                                <input type="number" id="cpf" name="cpf" required>
+                                </br>
+                            </td>
 
-                        <td>  
-                            <br>                          
-                            <label>Telefone:</label>
-                            <input type="tel" id="telefone">
-                            </br>
-                        </td>
-                            
-                    </tr>
+                        </tr>
+                        </br>
 
-                    <tr>
-                        <td> 
-                            <br>                           
-                            <label>Repita sua senha:</label>
-                            <input type="text" id="Repetir">
-                            </br>
-                        </td>
-                            
-                    </tr>
+                        <tr>
+                            <td>
+                                <br>
+                                <label>Senha*:</label>
+                                <input type="password" id="senha" name="senha" minlength="8" required>
+                                </br>
+                            </td>
 
-                    <div id="aside">
-                        <img src="books.png" alt="Books logo">
-                    </div>    
+                            <td>
+                                <br>
+                                <label>Telefone*:</label>
+                                <input type="tel" id="telefone">
+                                </br>
+                            </td>
 
-                    <td><center><div class="g-recaptcha" data-sitekey="6LfcwGwdAAAAAOeSVaaEDMb2mo6zQtBO3WAkOrdt"></div>
-                        <button type="button" class="btn" id="btnSalvar">FINALIZAR CADASTRO</button></center>
-                        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-                    async defer>
-                </script>
-                    </div></td>
-                    
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <br>
+                                <label>Repita sua senha*:</label>
+                                <input type="password" id="repSenha" name="repSenha" minlength="8" required>
+                                </br>
+                            </td>
+
+                        </tr>
+
+                        <div id="aside">
+                            <img src="books.png" alt="Books logo">
+                        </div>    
+    
+                        <td><center><div class="g-recaptcha" data-sitekey="6LfcwGwdAAAAAOeSVaaEDMb2mo6zQtBO3WAkOrdt"></div>
+                            <button type="button" class="btn" id="btnSalvar">Enviar Dados</button></center>
+                            <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                        async defer>
+                    </script>
                 </div>
-                
-            </form>
-            
-        </table>
-        
+                </td>
+
     </div>
 
-        <br>
-         
-        <div>
-          
+    </form>
+
+    </table>
+
+    </div>
+
+    <br>
+
+    <div>
+
         </br>
         <script type="module">
             // Import the functions you need from the SDKs you need
@@ -105,7 +106,7 @@
             import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
             // TODO: Add SDKs for Firebase products that you want to use
             // https://firebase.google.com/docs/web/setup#available-libraries
-    
+
             // Your web app's Firebase configuration
             // For Firebase JS SDK v7.20.0 and later, measurementId is optional
             const firebaseConfig = {
@@ -118,33 +119,53 @@
                 appId: "1:846419182189:web:90650898ab6ab54f09f564",
                 measurementId: "G-HL3H3TLRR5"
             };
-    
+
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
             const analytics = getAnalytics(app);
-    
+
             import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
-    
+
             const db = getDatabase();
-    
+
             var nome = document.getElementById("nome");
             var sobrenome = document.getElementById("sobrenome");
             var matricula = document.getElementById("matricula");
             var cpf = document.getElementById("cpf");
             var senha = document.getElementById("senha");
             var telefone = document.getElementById("telefone");
-    
+
             var btnSalvar = document.getElementById("btnSalvar");
+
+            function validar() {
+                 var senha = document.getElementById('senha').value;
+                 var repSenha = document.getElementById('repSenha').value;
+ 
+                 if (senha == repSenha) {
+                     document.getElementById('senha').style.borderColor = '#008b45'
+                     document.getElementById('repSenha').style.borderColor = '#008b45'
+                     document.getElementById('btnSalvar').disabled = false;
+
+                     InsertData();
+                 } else {
+                     document.getElementById('senha').style.borderColor = '#ff6347'
+                     document.getElementById('repSenha').style.borderColor = '#ff6347'
+                     document.getElementById('btnSalvar').disabled = true;
+                 }
+             }
+            // document.getElementById('btnSalvar').disabled = true;
+             //senha.addEventListener('input', function () { validar(senha) })
+            // repSenha.addEventListener('input', function () { validar(repSenha) })
 
             //INSERINDO DADOS NO BD---------------------------------------------
             function InsertData() {
                 set(ref(db, "users/" + cpf.value), {
                     cpf: cpf.value,
                     nome: nome.value,
-                    sobrenome:sobrenome.value,
+                    sobrenome: sobrenome.value,
                     matricula: matricula.value,
                     senha: senha.value,
-                    telefone: telefone.value    
+                    telefone: telefone.value
                 })
                     .then(() => {
                         alert("Cadastro efetuado!");
@@ -153,10 +174,11 @@
                         alert("Algo deu errado! Erro" + error);
                     });
             }
-    
-            btnSalvar.addEventListener('click', InsertData);
-    
-    </script>
 
-  </body>
+btnSalvar.addEventListener('click', validar);
+
+        </script>
+
+</body>
+
 </html>
