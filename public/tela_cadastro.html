@@ -79,21 +79,25 @@
                         <img src="books.png" alt="Books logo">
                     </div>    
 
-
+                    <td><center><div class="g-recaptcha" data-sitekey="6LfcwGwdAAAAAOeSVaaEDMb2mo6zQtBO3WAkOrdt"></div>
+                        <button type="button" class="btn" id="btnSalvar">FINALIZAR CADASTRO</button></center>
+                        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                    async defer>
+                </script>
+                    </div></td>
                     
                 </div>
+                
             </form>
+            
         </table>
+        
     </div>
 
         <br>
+         
         <div>
-            <div class="g-recaptcha" data-sitekey="6LfcwGwdAAAAAOeSVaaEDMb2mo6zQtBO3WAkOrdt"></div>
-            <button type="button" class="btn" id="btnSalvar">FINALIZAR CADASTRO</button>
-            <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-    </script>
-        </div>
+          
         </br>
         <script type="module">
             // Import the functions you need from the SDKs you need
@@ -131,7 +135,7 @@
             var telefone = document.getElementById("telefone");
     
             var btnSalvar = document.getElementById("btnSalvar");
-    
+
             //INSERINDO DADOS NO BD---------------------------------------------
             function InsertData() {
                 set(ref(db, "users/" + cpf.value), {

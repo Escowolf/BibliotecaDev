@@ -1,31 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.css" />
-  <link type="text/css" rel="stylesheet" href="bower_components/firebaseui/dist/firebaseui.css" />
-  <link type="text/css" href="./css/style.css" rel="stylesheet">
-  <title>Biblioteca Dev</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Firebase Example</title>
 </head>
 
-<body class="body">
-  <div class="title">
-    <h1>Bem-vindo à<br> BibliotecaDev!</h1>
-    <div type="content" class="content">
-      <p class="text"><b>Descubra um novo mundo...</b></p><br>
-      <p>Comece fazendo o seu login</p>
-      <div id="firebaseui-auth-container">
-        <!-- This is where the Login ui will load -->
-      </div>
-      <p class="text">não tem cadastro?<a href="tela_cadastro.html" class="links"> comece por aqui</a></p>
-    </div>
-    <div id="aside">
-      <img src="books.png" alt="Books logo">
-    </div>
+<body>
+  <div id="firebaseui-auth-container">
+    <!-- This is where the Login ui will load -->
   </div>
-
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
 
@@ -53,9 +39,9 @@ https://firebase.google.com/docs/web/setup#config-web-app -->
     firebase.initializeApp(firebaseConfig);
   </script>
   <!-- Firebase UI -->
-
+  
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-
+  
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <script src="./js/auth.js"></script>
 </body>

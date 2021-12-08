@@ -14,17 +14,21 @@ input.element{
     margin-left: 18%;
 }
 .content{
-    position: absolute;
+    position:relative;
     width: 300px;
     height: 300px;
     left: 21%;
     top: 25%;
     padding-bottom: 1%;
-    background: #C4C4C4;
+    background: #c4c4c481;
     border-radius: 30px;
-    text-align: center;
+    padding-top: 20px;
+    text-align: center;  
+    
+}
+.content.text{
+    top:10px;
     font-size: medium;
-    text-transform:lowercase;
 }
 
 #aside{
