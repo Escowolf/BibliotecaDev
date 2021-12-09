@@ -2,66 +2,112 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Catalogação</title>
-    <link href="/css/default.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Catalogação</title>
+  <link rel="stylesheet" href="/css/tela_catalogacao.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div>
-        <h1>CATALOGAÇÃO</h1>
-        <header>Biblioteca Virtual</header>
-        <section>
-          <form id="register">
-            <h3>Cadastre um livro</h3>
-            <label for="bookName">Insira o nome do livro:</label>
-            <input type="text" name="bookName" id="bookName">
-            <label for="bookAuthor">Insira o autor do livro:</label>
-            <input type="text" name="bookAuthor" id="bookAuthor">
-            <label for="bookPublisher">Insira a editora do livro:</label>
-            <input type="text" name="bookPublisher" id="bookPublisher">
-            <label for="numberOfPages">Insira a quantidade de páginas:</label>
-            <input type="number" name="numberOfPages" id="numberOfPages">
-            <label for="bookCover">Insira o link da capa:</label>
-            <input type="text" name="bookCover" id="bookCover">
-            <label for="synopsis">Insira a sinopse:</label>
-            <textarea name="synopsis" id="synopsis" cols="50" rows="10"></textarea>
-            <button id="btnRegister">Cadastre</button>
-          </form>
-      
-          <div id="myModal" class="modal">
-            <div id="contentModel" class="modal-content">
-              <span id="btnCloseModal">&times;</span>
-              <h3 id="modalTitle"></h3>
-              <p id="txtSynopsis"></p>
-            </div>
-          </div>
-      
-          <div id="listOfBooksSearch">
-            <h3>Busque um livro</h3>
-            <label for="bookNameSearch">Digite o livro que deseja procurar:</label>
-            <input type="text" name="bookNameSearch" id="bookNameSearch">
-            <button id="btnSearch">Buscar</button>
-            <div id="foundBooks"></div>
-          </div>
-      
-          <div id="AllBooks">
-            <h3 id="titleAllBooks">Todos os Livros</h3>
-            <div id="listOfAllBooks">
-              <p  id="emptyBookList">Nenhum livro cadastrado</p>
-            </div>
-          </div>
-        </section>
-      
-        <script src="/biblioteca.js"></script>
-      </body>
-    </div>
+  <div id="titulo">
+    <br><br>
 
+    <h1>CATALOGAÇÃO</h1>
+
+    <br><br>
+
+    <h2>Cadastre um livro</h2>
+  </div>
+  <br>
+  <hr>
+    <section>
+      <form id="register">
+        <fieldset>
+
+          <label class="label">Nome do livro: </label> <input type="text" id="bookName" class="input">
+          <br><br>
+          <label class="label">Autor do livro:</label> <input type="text" id="bookAuthor" class="input">
+          <br><br>
+          <label class="label">Editora do livro:</label> <input  type="text" id="bookPublisher" class="input">
+          <br><br>
+          <label class="label">Número de páginas:</label> <input  type="number" id="numberOfPages" class="input">
+          <br><br>
+          <label class="label">ISBN:</label> <input type="number"  id="isbn" class="input">
+          <br><br>
+          <label class="label">Link da capa:</label> <input type="text" id="bookCover" class="input">
+          <br><br>
+          <label class="label">Sinopse:</label> <br> <textarea id="synopsis" cols="50" rows="10" class="input"></textarea>
+          <br><br>
+          <button type="button" id="btnSalvar" class="btn">Cadastre</button>
+      </form>
+      <br><br>
+    </section>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+        authDomain: "bibliotecadevend.firebaseapp.com",
+        databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+        projectId: "bibliotecadevend",
+        storageBucket: "bibliotecadevend.appspot.com",
+        messagingSenderId: "846419182189",
+        appId: "1:846419182189:web:90650898ab6ab54f09f564",
+        measurementId: "G-HL3H3TLRR5"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+      import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+      const db = getDatabase();
+
+      var bookName = document.getElementById("bookName");
+      var bookAuthor = document.getElementById("bookAuthor");
+      var bookPublisher = document.getElementById("bookPublisher");
+      var numberOfPages = document.getElementById("numberOfPages");
+      var isbn = document.getElementById("isbn");
+      var bookCover = document.getElementById("bookCover");
+      var synopsis = document.getElementById("synopsis");
+
+      var btnSalvar = document.getElementById("btnSalvar");
+
+      //INSERINDO DADOS NO BD---------------------------------------------
+      function InsertData() {
+        set(ref(db, "obras/" + isbn.value), {
+          isbn: isbn.value,
+          bookName: bookName.value,
+          bookAuthor: bookAuthor.value,
+          bookPublisher: bookPublisher.value,
+          numberOfPages: numberOfPages.value,
+          bookCover: bookCover.value,
+          synopsis: synopsis.value
+        })
+          .then(() => {
+            alert("Obra cadastrada!");
+          })
+          .catch((error) => {
+            alert("Algo deu errado! Erro" + error);
+          });
+      }
+
+      btnSalvar.addEventListener('click', InsertData);
+
+    </script>
+
+    <script src="/biblioteca.js"></script>
 </body>
 
 </html>

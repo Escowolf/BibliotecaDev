@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/tela_catalogacao.css">
+
+    <style>
+        body {
+            background-color: rgba(0, 255, 255, 0);
+            width: 1100px;
+            align-items: center;
+            vertical-align: middle;
+            text-align: left;
+        }
+
+        #buscaCatalogo {
+            width: 1100px;
+            align-items: center;
+        }
+
+        #procurar {
+            border: 2px solid #DADADA;
+            margin: 5px 0;
+            font-size: 1.4rem;
+            padding: 5px 0 5px 10px;
+            line-height: normal;
+            border-radius: 20px;
+            width: 50%;
+
+        }
+    </style>
 
     <title>Tela Catálogo</title>
 </head>
+
 <body>
-    
+
     <div>
         <table border="0px" width="900px" align="center">
-            <form id="contatoForm" method="post" action="mailto:beatrizbottai18@gmail.com">
-                <div id="busca catalogo">
-                    <h1>CATÁLOGO<br>
+            <h1>CATÁLOGO</h1>
+            <br><br>
+            <form id="contatoForm">
+                <div id="buscaCatalogo" style="align-items: center;">
 
                     <tr>
                         <td>
                             <label></label>
-                            <input type="text" name="procurar" id="procurar" placeholder="Procure por autor, título ou tipo de obra...">
+                            <input type="text" name="procurar" id="procurar"
+                                placeholder="Procure por autor, título ou tipo de obra..."><br><br>
+                            <button type="button" class="btn" id="btnBuscar">BUSCAR</button>
                         </td>
 
 
@@ -28,16 +59,60 @@
         </table>
     </div>
 
-        
-        <div>
 
-            <button type="button" onclick="buscar()" class="btn" id="btnBuscar">BUSCAR</button>
+    <div>
 
-            <button type="button" onclick="buscaAvancada()" class="btn" id="btnAvancada">BUSCA AVANÇADA</button>
-            
-        </div>
-        
 
+
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzVibo9dzSY4RanPdIVnLouTA6mzDPtrs",
+            authDomain: "bibliotecadevend.firebaseapp.com",
+            databaseURL: "https://bibliotecadevend-default-rtdb.firebaseio.com",
+            projectId: "bibliotecadevend",
+            storageBucket: "bibliotecadevend.appspot.com",
+            messagingSenderId: "846419182189",
+            appId: "1:846419182189:web:90650898ab6ab54f09f564",
+            measurementId: "G-HL3H3TLRR5"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+        const db = getDatabase();
+
+        var procurar = document.getElementById("procurar");
+        var btnBuscar = document.getElementById("btnBuscar");
+        var bookName = 9788594318237;
+
+        //BUSCANDO DADOS NO BD---------------------------------------------
+        function SelectData() {
+            const dbRef = ref(db);
+            get(child(dbRef, `obras/${bookName}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val());
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+        btnBuscar.addEventListener('click', SelectData);
+    </script>
 
 </body>
+
 </html>
